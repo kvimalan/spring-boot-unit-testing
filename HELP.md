@@ -1,15 +1,10 @@
 # Getting Started
 
-### Reference Documentation
-For further reference, please consider the following sections:
+### TimeZone - UTC 
+Store time with timezone (UTC - Configured in application.properties file by default)
+Format : Date & Time in UTC timezone.
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Web Starter](https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-developing-web-applications)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+Eg:
+DateTimeWrapper (Before store data into DB) : DateTimeWrapper(id=null, instant=2019-11-12T05:50:00Z, localDateTime=2019-11-12T07:50, offsetDateTime=2019-12-14T08:30Z, zonedDateTime=2019-12-14T08:30Z, localTime=15:30, offsetTime=16:30+02:00, localDate=2019-08-11)
+After DateTimeWrapper(from DB)              : DateTimeWrapper(id=1, instant=2019-11-12T05:50:00Z, localDateTime=2019-11-12T07:50, offsetDateTime=2019-12-14T14:00+05:30, zonedDateTime=2019-12-14T14:00+05:30[Asia/Kolkata], localTime=15:30, offsetTime=16:30+05:30, localDate=2019-08-11)
 

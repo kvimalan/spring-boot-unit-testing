@@ -1,6 +1,7 @@
 package com.kk.springbootunittesting.timezone;
 
 import com.kk.springbootunittesting.SpringBootUnitTestingApplication;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * Properities file : spring.jpa.properties.hibernate.jdbc.time_zone= UTC
  */
+@Slf4j
 @ActiveProfiles("test")
 @SpringBootTest(classes = SpringBootUnitTestingApplication.class)
 public class TimeZoneIT {
@@ -51,6 +54,15 @@ public class TimeZoneIT {
         timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.of("UTC"));
 
         dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    }
+
+    @Test
+    public void printDateTimeWrapperFromDB(){
+        log.info("Before DateTimeWrapper        : "+dateTimeWrapper.toString());
+        dateTimeWrapperRepository.saveAndFlush(dateTimeWrapper);
+
+        Optional<DateTimeWrapper> dateTimeWrapperFromDB = dateTimeWrapperRepository.findById(dateTimeWrapper.getId());
+        log.info("After DateTimeWrapper(from DB) : "+dateTimeWrapperFromDB.get().toString());
     }
 
     @Test
